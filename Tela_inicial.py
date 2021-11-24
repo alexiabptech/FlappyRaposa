@@ -24,6 +24,27 @@ for i in range(1,3):
     raposas.append(img)
 imagens["raposas"] = raposas
 
+#iniciando a estrutura do jogo
+class Fox(pygame.sprite.Sprite):
+    def __init__(self, imagens):
+        # Construtor da classe mãe (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        self.raposas = imagens
+        self.frame = 0  # Armazena o índice atual na animação
+        self.image = self.raposas[self.frame]  # Pega a primeira imagem
+        self.rect = self.image.get_rect()
+        # Guarda o tick da primeira imagem, ou seja, o momento em que a imagem foi mostrada
+        self.last_update = pygame.time.get_ticks()
+        self.frame_ticks = 10
+        
+        
+        #self.image = imagens['raposas']
+        #self.rect = self.image.get.rect()
+        self.rect.y = altura/2
+        self.rect.x = 90
+        self.speedx = 0
+        self.speedy = 14
+
 
 game = True
 while game:
