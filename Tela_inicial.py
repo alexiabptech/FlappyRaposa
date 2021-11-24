@@ -24,6 +24,7 @@ for i in range(1,3):
     raposas.append(img)
 imagens["raposas"] = raposas
 
+
 game = True
 while game:
     # ----- Trata eventos
