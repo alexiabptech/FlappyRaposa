@@ -110,6 +110,21 @@ class obstaculo(pygame.sprite.Sprite):
             #self.speedy = random.randint(2, 9)
             self.speedy = 0
 
+groups = {}
+all_sprites = pygame.sprite.Group()
+
+all_livros = pygame.sprite.Group()
+
+groups['all_sprites'] = all_sprites
+groups['all_livros'] = all_livros
+
+clock = pygame.time.Clock()
+fps = 20
+
+#criando o jogador
+player = Fox(imagens['raposas'])
+all_sprites.add(player)
+
 game = True
 while game:
     # ----- Trata eventos
