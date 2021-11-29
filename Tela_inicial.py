@@ -139,6 +139,17 @@ while game:
         if event.type == pygame.QUIT:
             game = False
 
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                player.speedy -= 80
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_UP:
+                player.speedy += 80
+
+    if len(all_pipes) > 5:
+        all_pipes = []
+    all_sprites.update()
+
     # ----- Gera saídas
     window.fill((0, 0, 0))  # Preenche com a cor branca
     window.blit(imagens['fundo'], (0, 0))
