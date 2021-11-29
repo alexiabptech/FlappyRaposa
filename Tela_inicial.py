@@ -1,21 +1,25 @@
 import pygame
+import random
+import time
 
-#Inicialização
 pygame.init()
+pygame.mixer.init() #para música
 
-#Gera Tela Principal
-raposa_lar = 60
-raposa_alt = 40
-largura = 600
+# ----- Gera tela principal
+largura = 500
 altura = 500
-window = pygame.display.set_mode((largura,altura)) 
-pygame.display.set_caption('JumpFox')
+raposa_lar = 80
+raposa_alt = 60
+obst_lar = 50
+obst_alt = 30
+
+window = pygame.display.set_mode((largura, altura))
+pygame.display.set_caption('Flappy Fox')
 
 imagens = {}
-imagens['background'] = pygame.image.load('flappy_fox/img/p_fundo.png').convert()
-imagens['cano'] = pygame.image.load('flappy_fox/img/caninho.png').convert_alpha()
+imagens['fundo'] = pygame.image.load('raposa_text.py/flappy_fox/img/p_fundo.png').convert()
 
-#Animação da Raposa
+#faz a animação da raposa
 raposas = []
 for i in range(1,3):
     filename = 'raposa_text.py/flappy_fox/img/raposa{}.png'.format(i)
