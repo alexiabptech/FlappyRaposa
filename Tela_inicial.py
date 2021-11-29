@@ -11,8 +11,8 @@ raposa_lar = 80
 raposa_alt = 60
 obst_lar = 50
 obst_alt = 30
-cerveja_lar = 50
-cerveja_alt = 60 
+cerveja_lar = 20
+cerveja_alt = 30 
 
 window = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption('Flappy Fox')
