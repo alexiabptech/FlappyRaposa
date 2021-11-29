@@ -1,6 +1,5 @@
 import pygame
 import random
-import time
 
 pygame.init()
 pygame.mixer.init() #para música
@@ -12,6 +11,8 @@ raposa_lar = 80
 raposa_alt = 60
 obst_lar = 50
 obst_alt = 30
+cerveja_lar = 50
+cerveja_alt = 60 
 
 window = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption('Flappy Fox')
@@ -31,15 +32,20 @@ imagens["raposas"] = raposas
 imagens["obstaculos"] = pygame.image.load('flappy_fox/img/livro1.png').convert_alpha()
 imagens["obstaculos"] = pygame.transform.scale(imagens["obstaculos"], (obst_lar, obst_alt))
 
+imagens["cerveja"] = pygame.image.load('flappy_fox/img/cerveja.png').convert_alpha()
+imagens["cerveja"] = pygame.transform.scale(imagens["cerveja"], (cerveja_lar, cerveja_alt))
+
 #iniciando a estrutura do jogo
 class Fox(pygame.sprite.Sprite):
-    def __init__(self, imagens):
+    def __init__(self, imagens, all_sprites, all_bullets, cerveja_img):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
         self.raposas = imagens
         self.frame = 0  # Armazena o índice atual na animação
         self.image = self.raposas[self.frame]  # Pega a primeira imagem
         self.rect = self.image.get_rect()
+        self.rect.centerx = altura / 2
+        self.rect.bottom = largura - 10
         # Guarda o tick da primeira imagem, ou seja, o momento em que a imagem foi mostrada
         self.last_update = pygame.time.get_ticks()
         self.frame_ticks = 10
@@ -51,6 +57,11 @@ class Fox(pygame.sprite.Sprite):
         self.rect.x = 90
         self.speedx = 0
         self.speedy = 14
+
+        self.all_sprites = all_sprites
+        self.all_bullets = all_bullets
+        self.cerveja_img = cerveja_img
+
 
     def update (self):
         self.rect.x += self.speedx
@@ -81,6 +92,12 @@ class Fox(pygame.sprite.Sprite):
         if self.rect.bottom > altura - 50:
             self.rect.y = altura - 50
 
+    def shoot(self): 
+
+        new_bullet = Bullet(self.cerveja_img, self.rect.top, self.rect.centerx)
+        self.all_sprites.add(new_bullet)
+        self.all_bullets.add(new_bullet)
+
 class obstaculo(pygame.sprite.Sprite):
     def __init__(self, imagens):
         # Construtor da classe mãe (Sprite).
@@ -110,18 +127,41 @@ class obstaculo(pygame.sprite.Sprite):
             #self.speedy = random.randint(2, 9)
             self.speedy = 0.2
 
+class Bullet(pygame.sprite.Sprite):
+    def __init__(self, img, bottom, centerx):
+        # Construtor da classe mãe (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = img
+        self.rect = self.image.get_rect()
+
+        # Coloca no lugar inicial definido em x, y do constutor
+        self.rect.centerx = centerx
+        self.rect.bottom = bottom
+        self.speedx = +10  # Velocidade fixa para cima
+
+    def update(self):
+        # A bala só se move no eixo y
+        self.rect.x += self.speedx
+
+        # Se o tiro passar do inicio da tela, morre.
+        if self.rect.bottom < 0:
+            self.kill()
+            
 groups = {}
 all_sprites = pygame.sprite.Group()
 all_livros = pygame.sprite.Group()
+all_bullets = pygame.sprite.Group()
 
 groups['all_sprites'] = all_sprites
 groups['all_livros'] = all_livros
+groups['all_bullets'] = all_bullets
 
 clock = pygame.time.Clock()
 fps = 20
 
 #criando o jogador
-player = Fox(imagens['raposas'])
+player = Fox(imagens['raposas'], all_sprites, all_bullets, imagens['cerveja'])
 all_sprites.add(player)
 
 game = True
@@ -142,16 +182,29 @@ while game:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 player.speedy -= 80
+
+            if event.key == pygame.K_SPACE:
+                player.shoot()
+
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_UP:
                 player.speedy += 80
 
-    
+
+    all_sprites.update()
+
+    hits = pygame.sprite.groupcollide(all_livros, all_bullets, True, True)
+    for meteor in hits: # As chaves são os elementos do primeiro grupo (meteoros) que colidiram com alguma bala
+        # O meteoro e destruido e precisa ser recriado
+        m = obstaculo(imagens['obstaculos'])
+        all_sprites.add(m)
+        all_livros.add(m)
+
     hits = pygame.sprite.spritecollide(player, all_livros, True)
     if len(hits) > 0:
         game = False
 
-    all_sprites.update()
+
     # ----- Gera saídas
     window.fill((0, 0, 0))  # Preenche com a cor branca
     window.blit(imagens['fundo'], (0, 0))
