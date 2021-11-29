@@ -35,6 +35,10 @@ imagens["obstaculos"] = pygame.transform.scale(imagens["obstaculos"], (obst_lar,
 imagens["cerveja"] = pygame.image.load('flappy_fox/img/cerveja.png').convert_alpha()
 imagens["cerveja"] = pygame.transform.scale(imagens["cerveja"], (cerveja_lar, cerveja_alt))
 
+#carregando os sons do jogo
+pygame.mixer.music.load('flappy_fox/sound/tgfcoder-FrozenJam-SeamlessLoop.ogg')
+pygame.mixer.music.set_volume(0.4)
+
 #iniciando a estrutura do jogo
 class Fox(pygame.sprite.Sprite):
     def __init__(self, imagens, all_sprites, all_bullets, cerveja_img):
@@ -56,7 +60,7 @@ class Fox(pygame.sprite.Sprite):
         self.rect.y = altura/2
         self.rect.x = 90
         self.speedx = 0
-        self.speedy = 14
+        self.speedy = 0
 
         self.all_sprites = all_sprites
         self.all_bullets = all_bullets
@@ -158,7 +162,7 @@ groups['all_livros'] = all_livros
 groups['all_bullets'] = all_bullets
 
 clock = pygame.time.Clock()
-fps = 20
+fps = 10
 
 #criando o jogador
 player = Fox(imagens['raposas'], all_sprites, all_bullets, imagens['cerveja'])
@@ -171,6 +175,7 @@ for i in range(5):
     all_sprites.add(livro)
     all_livros.add(livro)
 
+pygame.mixer.music.play(loops=-1)
 while game:
     clock.tick(fps)
     # ----- Trata eventos
@@ -179,16 +184,22 @@ while game:
         if event.type == pygame.QUIT:
             game = False
 
+        
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                player.speedy -= 80
-
+                player.speedy -= 11
+            if event.key == pygame.K_DOWN:
+                player.speedy += 11 
             if event.key == pygame.K_SPACE:
                 player.shoot()
-
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_UP:
-                player.speedy += 80
+                player.speedy += 11
+            if event.key == pygame.K_DOWN:
+                player.speedy -= 11
+ 
+       
+        
 
 
     all_sprites.update()
