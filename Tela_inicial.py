@@ -28,6 +28,9 @@ for i in range(1,3):
     raposas.append(img)
 imagens["raposas"] = raposas
 
+imagens["obstaculos"] = pygame.image.load('jogo_reserva/flappy_fox/img/livro1.png').convert_alpha()
+imagens["obstaculos"] = pygame.transform.scale(imagens["obstaculos"], (obst_lar, obst_alt))
+
 #iniciando a estrutura do jogo
 class Fox(pygame.sprite.Sprite):
     def __init__(self, imagens):
