@@ -112,7 +112,6 @@ class obstaculo(pygame.sprite.Sprite):
 
 groups = {}
 all_sprites = pygame.sprite.Group()
-
 all_livros = pygame.sprite.Group()
 
 groups['all_sprites'] = all_sprites
@@ -126,7 +125,14 @@ player = Fox(imagens['raposas'])
 all_sprites.add(player)
 
 game = True
+
+for i in range(5):
+    livro = obstaculo(imagens["obstaculos"])
+    all_sprites.add(livro)
+    all_livros.add(livro)
+
 while game:
+    clock.tick(fps)
     # ----- Trata eventos
     for event in pygame.event.get():
         # ----- Verifica consequências
