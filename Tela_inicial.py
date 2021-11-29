@@ -81,6 +81,20 @@ class Fox(pygame.sprite.Sprite):
         if self.rect.bottom > altura - 50:
             self.rect.y = altura - 50
 
+class obstaculo(pygame.sprite.Sprite):
+    def __init__(self, imagens):
+        # Construtor da classe mãe (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = imagens
+        self.rect = self.image.get_rect()
+        self.rect.x = largura
+        #self.rect.y = random.randint(-100, - obst_alt)
+        self.rect.y = random.randint(0,largura)
+        self.speedx = random.randint(0, 4)
+        #self.speedy = random.randint(2, 9)
+        self.speedy = 0
+
 game = True
 while game:
     # ----- Trata eventos
