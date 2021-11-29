@@ -17,18 +17,18 @@ window = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption('Flappy Fox')
 
 imagens = {}
-imagens['fundo'] = pygame.image.load('raposa_text.py/flappy_fox/img/p_fundo.png').convert()
+imagens['fundo'] = pygame.image.load('flappy_fox/img/p_fundo.png').convert()
 
 #faz a animação da raposa
 raposas = []
 for i in range(1,3):
-    filename = 'raposa_text.py/flappy_fox/img/raposa{}.png'.format(i)
+    filename = 'flappy_fox/img/raposa{}.png'.format(i)
     img = pygame.image.load(filename).convert_alpha()
     img = pygame.transform.scale(img,(raposa_lar,raposa_alt))
     raposas.append(img)
 imagens["raposas"] = raposas
 
-imagens["obstaculos"] = pygame.image.load('jogo_reserva/flappy_fox/img/livro1.png').convert_alpha()
+imagens["obstaculos"] = pygame.image.load('flappy_fox/img/livro1.png').convert_alpha()
 imagens["obstaculos"] = pygame.transform.scale(imagens["obstaculos"], (obst_lar, obst_alt))
 
 #iniciando a estrutura do jogo
@@ -91,7 +91,7 @@ while game:
 
     # ----- Gera saídas
     window.fill((0, 0, 0))  # Preenche com a cor branca
-    window.blit(imagens['background'], (0, 0))
+    window.blit(imagens['fundo'], (0, 0))
 
 
     pygame.display.update()
