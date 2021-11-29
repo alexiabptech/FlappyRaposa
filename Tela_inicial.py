@@ -94,6 +94,21 @@ class obstaculo(pygame.sprite.Sprite):
         self.speedx = random.randint(0, 4)
         #self.speedy = random.randint(2, 9)
         self.speedy = 0
+    def update(self):
+        # Atualizando a posição 
+        self.rect.x -= self.speedx
+        self.rect.y += self.speedy
+
+        # Se passar do final da tela, volta para cima e sorteia
+        # novas posições e velocidades
+
+        if self.rect.top > largura or self.rect.right < 0 or self.rect.left > altura:
+            self.rect.x = largura
+            #self.rect.y = random.randint(-100, - obst_alt)
+            self.rect.y = random.randint(0,largura)
+            self.speedx = random.randint(0, 4)
+            #self.speedy = random.randint(2, 9)
+            self.speedy = 0
 
 game = True
 while game:
