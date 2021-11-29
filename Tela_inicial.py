@@ -52,6 +52,34 @@ class Fox(pygame.sprite.Sprite):
         self.speedx = 0
         self.speedy = 14
 
+    def update (self):
+        self.rect.x += self.speedx
+        self.rect.y += self.speedy
+        x = self.rect.x
+        y = self.rect.y
+        now = pygame.time.get_ticks()
+
+        # Verifica quantos ticks se passaram desde a ultima mudança de frame.
+        elapsed_ticks = now - self.last_update
+         # Se já está na hora de mudar de imagem...
+
+        if elapsed_ticks > self.frame_ticks:
+            # Marca o tick da nova imagem.
+            self.last_update = now
+            # Avança um quadro.
+            self.frame = (self.frame + 1) % len(self.raposas)
+            self.image = self.raposas[self.frame]  # Pega a primeira imagem
+            self.rect = self.image.get_rect()
+            self.rect.x = x
+            self.rect.y = y
+
+        # Guarda o tick da primeira imagem, ou seja, o momento em que a imagem foi mostrada
+            self.last_update = pygame.time.get_ticks()  
+
+        if self.rect.top < 0:
+            self.rect.y = 0
+        if self.rect.bottom > altura - 50:
+            self.rect.y = altura - 50
 
 game = True
 while game:
