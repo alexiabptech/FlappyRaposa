@@ -106,9 +106,9 @@ class obstaculo(pygame.sprite.Sprite):
             self.rect.x = largura
             #self.rect.y = random.randint(-100, - obst_alt)
             self.rect.y = random.randint(0,largura)
-            self.speedx = random.randint(0, 4)
+            self.speedx = random.randint(-3, 3)
             #self.speedy = random.randint(2, 9)
-            self.speedy = 0
+            self.speedy = 0.2
 
 groups = {}
 all_sprites = pygame.sprite.Group()
@@ -151,7 +151,7 @@ while game:
     if len(hits) > 0:
         game = False
 
-
+    all_sprites.update()
     # ----- Gera saídas
     window.fill((0, 0, 0))  # Preenche com a cor branca
     window.blit(imagens['fundo'], (0, 0))
