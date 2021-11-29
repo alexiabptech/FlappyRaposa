@@ -146,15 +146,17 @@ while game:
             if event.key == pygame.K_UP:
                 player.speedy += 80
 
-    if len(all_pipes) > 5:
-        all_pipes = []
-    all_sprites.update()
+    
+    hits = pygame.sprite.spritecollide(player, all_livros, True)
+    if len(hits) > 0:
+        game = False
+
 
     # ----- Gera saídas
     window.fill((0, 0, 0))  # Preenche com a cor branca
     window.blit(imagens['fundo'], (0, 0))
 
-
+    all_sprites.draw(window)
     pygame.display.update()
 
 pygame.quit()    
