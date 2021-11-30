@@ -158,9 +158,11 @@ class obstaculo(pygame.sprite.Sprite):
             self.rect.x = largura
             #self.rect.y = random.randint(-100, - obst_alt)
             self.rect.y = random.randint(0,largura)
-            self.speedx = random.randint(-3, 3)
+            self.speedx = random.randint(6, 25)
             #self.speedy = random.randint(2, 9)
             self.speedy = 0.2
+        if self.rect.bottom > altura - 60:
+            self.rect.y = altura - 60
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, img, bottom, centerx):
@@ -237,11 +239,23 @@ while game:
     all_sprites.update()
 
     hits = pygame.sprite.groupcollide(all_livros, all_bullets, True, True)
-    for meteor in hits: # As chaves são os elementos do primeiro grupo (meteoros) que colidiram com alguma bala
-        # O meteoro e destruido e precisa ser recriado
-        m = obstaculo(imagens['obstaculos'])
-        all_sprites.add(m)
-        all_livros.add(m)
+    for livro in hits: # As chaves são os elementos do primeiro grupo (meteoros) que colidiram com alguma bala
+        
+        pontos += 1
+        conta_pontos = font.render(f'{pontos}', True, (255, 255, 255))
+
+        if pontos == 20:
+            imagens['fundo'] =pygame.image.load('jogo_reserva/flappy_fox/img/noite.jpeg').convert()
+            
+            for i in range(8):
+                livro = obstaculo(imagens["obstaculos"])
+                livro.speedx = random.randint(15,30)
+                all_sprites.add(livro)
+                all_livros.add(livro)
+            
+
+        if pontos == 40:
+            imagens['fundo'] =pygame.image.load('jogo_reserva/flappy_fox/img/fundo.png').convert()
 
     hits = pygame.sprite.spritecollide(player, all_livros, True)
     if len(hits) > 0:
