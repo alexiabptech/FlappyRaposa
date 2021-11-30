@@ -47,8 +47,9 @@ imagens["chão"] = pygame.transform.scale(imagens["chão"], (largura, 200))
 floor_pos_i = 0
 
 #carregando os sons do jogo
-pygame.mixer.music.load('flappy_fox/sound/tgfcoder-FrozenJam-SeamlessLoop.ogg')
+pygame.mixer.music.load('flappy_fox/sound/backsound.wav')
 pygame.mixer.music.set_volume(0.4)
+imagens['pew_sound'] = pygame.mixer.Sound('flappy_fox/sound/pew_2.wav')
 
 #iniciando a estrutura do jogo
 
@@ -209,6 +210,7 @@ while game:
                 player.speedy += 11 
             if event.key == pygame.K_SPACE:
                 player.shoot()
+                imagens['pew_sound'].play()
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_UP:
                 player.speedy += 11
