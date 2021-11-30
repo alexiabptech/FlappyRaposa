@@ -76,13 +76,17 @@ class Fox(pygame.sprite.Sprite):
         #self.image = imagens['raposas']
         #self.rect = self.image.get.rect()
         self.rect.y = altura/2
-        self.rect.x = 90
+        self.rect.x = 50
         self.speedx = 0
         self.speedy = 0
 
         self.all_sprites = all_sprites
         self.all_bullets = all_bullets
         self.cerveja_img = cerveja_img
+    
+        # Só será possível atirar uma vez a cada 400 milissegundos
+        self.last_shot = pygame.time.get_ticks()
+        self.shoot_ticks = 400
 
 
     def update (self):
@@ -115,10 +119,19 @@ class Fox(pygame.sprite.Sprite):
             self.rect.y = altura - 50
 
     def shoot(self): 
+        # Verifica se pode atirar
+        now = pygame.time.get_ticks()
+        # Verifica quantos ticks se passaram desde o último tiro.
+        elapsed_ticks = now - self.last_shot
+        
+        if elapsed_ticks > self.shoot_ticks:
+            # Marca o tick da nova imagem.
+            self.last_shot = now
+            new_bullet = Bullet(self.cerveja_img, self.rect.top, self.rect.centerx)
+            self.all_sprites.add(new_bullet)
+            self.all_bullets.add(new_bullet)
+            #self.imagens['pew_sound'].play() 
 
-        new_bullet = Bullet(self.cerveja_img, self.rect.top, self.rect.centerx)
-        self.all_sprites.add(new_bullet)
-        self.all_bullets.add(new_bullet)
 
 class obstaculo(pygame.sprite.Sprite):
     def __init__(self, imagens):
@@ -130,7 +143,7 @@ class obstaculo(pygame.sprite.Sprite):
         self.rect.x = largura
         #self.rect.y = random.randint(-100, - obst_alt)
         self.rect.y = random.randint(0,largura)
-        self.speedx = random.randint(0, 4)
+        self.speedx = random.randint(6, 25)
         #self.speedy = random.randint(2, 9)
         self.speedy = 0
     def update(self):
