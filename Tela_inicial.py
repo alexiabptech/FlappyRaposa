@@ -7,15 +7,22 @@ pygame.mixer.init() #para música
 # ----- Gera tela principal
 largura = 500
 altura = 500
-raposa_lar = 80
-raposa_alt = 60
-obst_lar = 50
+raposa_lar = 60
+raposa_alt = 40
+obst_lar = 40
 obst_alt = 30
 cerveja_lar = 20
 cerveja_alt = 30 
 
 window = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption('Flappy Fox')
+
+#Criando o texto de pontuação
+font = pygame.font.SysFont(None, 30)
+text = font.render('Pontuação', True, (255, 255, 255))
+pontos = 0
+conta_pontos = font.render(f'{pontos}', True, (255, 255, 255))
+inicial = font.render('Para iniciar clique na tecla espaço', True, (0,255,0))
 
 imagens = {}
 imagens['fundo'] = pygame.image.load('flappy_fox/img/p_fundo.png').convert()
@@ -34,6 +41,10 @@ imagens["obstaculos"] = pygame.transform.scale(imagens["obstaculos"], (obst_lar,
 
 imagens["cerveja"] = pygame.image.load('flappy_fox/img/cerveja.png').convert_alpha()
 imagens["cerveja"] = pygame.transform.scale(imagens["cerveja"], (cerveja_lar, cerveja_alt))
+
+imagens['chão'] = pygame.image.load('jogo_reserva/flappy_fox/img/floor.jpeg').convert_alpha()
+imagens["chão"] = pygame.transform.scale(imagens["chão"], (largura, 200))
+floor_pos_i = 0
 
 #carregando os sons do jogo
 pygame.mixer.music.load('flappy_fox/sound/tgfcoder-FrozenJam-SeamlessLoop.ogg')
