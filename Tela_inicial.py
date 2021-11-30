@@ -51,6 +51,12 @@ pygame.mixer.music.load('flappy_fox/sound/tgfcoder-FrozenJam-SeamlessLoop.ogg')
 pygame.mixer.music.set_volume(0.4)
 
 #iniciando a estrutura do jogo
+
+#desenhando o chão
+def desenha_chao():
+    window.blit(imagens['chão'],(floor_pos_i,440))
+    window.blit(imagens['chão'],(floor_pos_i + 500 ,440))# cria uma imagem logo em seguida
+
 class Fox(pygame.sprite.Sprite):
     def __init__(self, imagens, all_sprites, all_bullets, cerveja_img):
         # Construtor da classe mãe (Sprite).
@@ -230,8 +236,13 @@ while game:
     # ----- Gera saídas
     window.fill((0, 0, 0))  # Preenche com a cor branca
     window.blit(imagens['fundo'], (0, 0))
-
     all_sprites.draw(window)
+
+    floor_pos_i -= 4 #movimento o chão
+    desenha_chao()
+    if floor_pos_i <= -500:
+        floor_pos_i = 0
+
     pygame.display.update()
 
 pygame.quit()    
