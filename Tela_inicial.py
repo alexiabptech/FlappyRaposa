@@ -42,7 +42,7 @@ imagens["obstaculos"] = pygame.transform.scale(imagens["obstaculos"], (obst_lar,
 imagens["cerveja"] = pygame.image.load('flappy_fox/img/cerveja.png').convert_alpha()
 imagens["cerveja"] = pygame.transform.scale(imagens["cerveja"], (cerveja_lar, cerveja_alt))
 
-imagens['chão'] = pygame.image.load('jogo_reserva/flappy_fox/img/floor.jpeg').convert_alpha()
+imagens['chão'] = pygame.image.load('flappy_fox/img/floor.jpeg').convert_alpha()
 imagens["chão"] = pygame.transform.scale(imagens["chão"], (largura, 200))
 floor_pos_i = 0
 
