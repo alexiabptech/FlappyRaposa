@@ -160,7 +160,7 @@ class obstaculo(pygame.sprite.Sprite):
             self.rect.y = random.randint(0,largura)
             self.speedx = random.randint(6, 25)
             #self.speedy = random.randint(2, 9)
-            self.speedy = 0.2
+            
         if self.rect.bottom > altura - 60:
             self.rect.y = altura - 60
 
