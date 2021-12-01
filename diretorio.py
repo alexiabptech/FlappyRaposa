@@ -1,1 +1,0 @@
-pygame.image.load('flappy_fox/img/p_fundo.png').convert()
