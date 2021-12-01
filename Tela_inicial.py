@@ -259,6 +259,13 @@ while game:
         if pontos == 40:
             imagens['fundo'] =pygame.image.load('jogo_reserva/flappy_fox/img/fundo.png').convert()
 
+        #O meteoro e destruido e precisa ser recriado
+        m = obstaculo(imagens['obstaculos'])
+        all_sprites.add(m)
+        all_livros.add(m)
+
+
+
     hits = pygame.sprite.spritecollide(player, all_livros, True, pygame.sprite.collide_mask)
     if len(hits) > 0:
         game = False
