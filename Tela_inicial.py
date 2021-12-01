@@ -139,6 +139,7 @@ class obstaculo(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = imagens
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.x = largura
         #self.rect.y = random.randint(-100, - obst_alt)
@@ -170,6 +171,7 @@ class Bullet(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = img
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
 
         # Coloca no lugar inicial definido em x, y do constutor
@@ -238,7 +240,7 @@ while game:
 
     all_sprites.update()
 
-    hits = pygame.sprite.groupcollide(all_livros, all_bullets, True, True)
+    hits = pygame.sprite.groupcollide(all_livros, all_bullets, True, True,pygame. sprite.collide_mask)
     for livro in hits: # As chaves são os elementos do primeiro grupo (meteoros) que colidiram com alguma bala
         
         pontos += 1
@@ -257,7 +259,7 @@ while game:
         if pontos == 40:
             imagens['fundo'] =pygame.image.load('jogo_reserva/flappy_fox/img/fundo.png').convert()
 
-    hits = pygame.sprite.spritecollide(player, all_livros, True)
+    hits = pygame.sprite.spritecollide(player, all_livros, True, pygame.sprite.collide_mask)
     if len(hits) > 0:
         game = False
 
@@ -265,6 +267,8 @@ while game:
     # ----- Gera saídas
     window.fill((0, 0, 0))  # Preenche com a cor branca
     window.blit(imagens['fundo'], (0, 0))
+    window.blit(text, (390, 10))
+    window.blit(conta_pontos,(436,30))
     all_sprites.draw(window)
 
     floor_pos_i -= 4 #movimento o chão
