@@ -93,7 +93,7 @@ def game_screen(window):
             conta_pontos = font.render(f'{pontos}', True, (255, 255, 255))
 
             if pontos == 20:
-                imagens['fundo'] =pygame.image.load('raposa_text.py/flappy_fox/img/noite.jpeg').convert()
+                imagens['fundo'] =pygame.image.load('flappy_fox/img/noite.jpeg').convert()
 
                 for i in range(8):
                     livro = obstaculo(imagens['obstaculos'])
@@ -101,7 +101,7 @@ def game_screen(window):
                     all_sprites.add(livro)
                     all_livros.add(livro)
             if pontos == 40:
-                imagens['fundo'] =pygame.image.load('raposa_text.py/flappy_fox/img/fundo.png').convert()    
+                imagens['fundo'] =pygame.image.load('flappy_fox/img/fundo.png').convert()    
                 
 
             #O livro e destruido e precisa ser recriado
