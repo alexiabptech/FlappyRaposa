@@ -247,7 +247,7 @@ while game:
         conta_pontos = font.render(f'{pontos}', True, (255, 255, 255))
 
         if pontos == 20:
-            imagens['fundo'] =pygame.image.load('jogo_reserva/flappy_fox/img/noite.jpeg').convert()
+            imagens['fundo'] =pygame.image.load('flappy_fox/img/noite.jpeg').convert()
             
             for i in range(8):
                 livro = obstaculo(imagens["obstaculos"])
@@ -257,7 +257,7 @@ while game:
             
 
         if pontos == 40:
-            imagens['fundo'] =pygame.image.load('jogo_reserva/flappy_fox/img/fundo.png').convert()
+            imagens['fundo'] =pygame.image.load('flappy_fox/img/fundo.png').convert()
 
         #O meteoro e destruido e precisa ser recriado
         m = obstaculo(imagens['obstaculos'])
