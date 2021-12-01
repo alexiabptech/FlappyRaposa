@@ -11,7 +11,7 @@ pygame.mixer.init() #para música
 
 
 #carregando os sons do jogo
-pygame.mixer.music.load('raposa_text.py/flappy_fox/sound/backsound.wav')
+pygame.mixer.music.load('flappy_fox/sound/backsound.wav')
 pygame.mixer.music.set_volume(0.4)
 
 window = pygame.display.set_mode((largura, altura))
