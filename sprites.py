@@ -58,7 +58,7 @@ class Fox(pygame.sprite.Sprite):
 
         #Bottom para aparecer o rodapé
         if self.rect.top < 0:
-            self.rect.y = 0
+            self.rect.top = 0
         if self.rect.bottom > altura - 60:
             self.rect.bottom = altura - 60
 
