@@ -1,6 +1,6 @@
 import pygame
 import random
-
+ 
 pygame.init()
 pygame.mixer.init() #para música
 
@@ -25,7 +25,7 @@ conta_pontos = font.render(f'{pontos}', True, (255, 255, 255))
 inicial = font.render('Para iniciar clique na tecla espaço', True, (0,255,0))
 
 imagens = {}
-imagens['fundo'] = pygame.image.load('flappy_fox/img/p_fundo.png').convert()
+imagens['fundo'] = pygame.image.load('flappy_fox/img/p_fundo.png').convert()  
 
 #faz a animação da raposa
 raposas = []
@@ -210,9 +210,12 @@ for i in range(5):
     all_sprites.add(livro)
     all_livros.add(livro)
 
+
 pygame.mixer.music.play(loops=-1)
 while game:
+
     clock.tick(fps)
+
     # ----- Trata eventos
     for event in pygame.event.get():
         # ----- Verifica consequências
