@@ -102,7 +102,11 @@ def game_screen(window):
                     all_livros.add(livro)
             if pontos == 40:
                 imagens['fundo'] =pygame.image.load('flappy_fox/img/fundo.png').convert()    
-                
+                for i in range(8):
+                    livro = obstaculo(imagens['obstaculos'])
+                    livro.speedx = random.randint(20,40)
+                    all_sprites.add(livro)
+                    all_livros.add(livro)
 
             #O livro e destruido e precisa ser recriado
             m = obstaculo(imagens['obstaculos'])
