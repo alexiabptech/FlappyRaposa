@@ -12,7 +12,7 @@ def end_screen(screen):
     clock = pygame.time.Clock()
 
     # Carrega o fundo da tela inicial
-    background = pygame.image.load('raposa_text.py/flappy_fox/img/f_screen.jpeg').convert()
+    background = pygame.image.load('flappy_fox/img/f_screen.jpeg').convert()
     background = pygame.transform.scale(background,(500,500))
     background_rect = background.get_rect()
 
